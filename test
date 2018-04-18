@@ -146,3 +146,65 @@ describe('/PATCH Patch a card with a Status variable active test', () => {
 });
 });
 });
+process.env.NODE_ENV = 'test';
+
+let mongoose = require("mongoose");
+let Book = require('../app/models/book');
+
+let chai = require('chai');
+let chaiHttp = require('chai-http');
+let server = require('../server');
+let should = chai.should();
+
+chai.use(chaiHttp);
+
+describe('item', () => {
+    beforeEach((done) => {
+        Book.remove({}, (err) => {
+           done();
+        });
+    });
+describe('/POST item', () => {
+      it('it should not POST a item', (done) => {
+        let item = {
+            name:this.name
+            price:this.price
+            type:this.type
+            description:this.description
+
+        }
+            chai.request(server)
+            .post('/item')
+            .send(item)
+            .end((err, res) => {
+                res.should.have.status(200);
+                res.body.should.be.a('object');
+                res.body.should.have.property('errors');
+                res.body.errors.should.have.property('pages');
+                res.body.errors.pages.should.have.property('kind').eql('required');
+              done();
+            });
+      });
+      it('it should POST a item ', (done) => {
+      let item = {
+         name:this.name
+         price:this.price
+         type:this.type
+         description:this.description
+        }
+            chai.request(server)
+            .post('/item')
+            .send(item)
+            .end((err, res) => {
+               res.should.have.status(200);
+               res.body.should.be.a('object');
+                res.body.should.have.property('message').eql('item successfully added!');
+               res.body.item.should.have.property('name');
+                res.body.item.should.have.property('price');
+                res.body.item.should.have.property('type');
+                res.body.item.should.have.property('description');
+              done();
+            });
+      });
+  });
+
