@@ -27,8 +27,11 @@
 <label>______________________________________________________________ </label>
 <br></br>
   <a class="btn btn-primary" v-on:click="addItem" ><b>+</b> Post Item</a>
-  <a class="btn btn-primary" href="http://localhost:8080/#/admin/Item" ><b>+</b> View Items</a>
-  <!-- a button to add new items -->
+   <!-- a button to add new items -->
+  <a class="btn btn-primary" href="http://localhost:8080/#/admin/Item" ><b>+</b> View My Items</a>
+ <!-- a button to view user's own items -->
+  <a class="btn btn-primary" href="http://localhost:8080/#/admin/AllItems" ><b>+</b> View All Items</a>
+  <!-- a button to view All other users' items -->
 </div>
   </div>
   </div>

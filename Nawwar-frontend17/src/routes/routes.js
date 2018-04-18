@@ -11,6 +11,7 @@ import ApplyTeacherReq from 'src/components/Dashboard/Views/ApplyTeacherReq.vue'
 import Items from 'src/components/Dashboard/Views/Items.vue'
 import AddChild from 'src/components/Dashboard/Views/AddChild.vue'
 import Item from 'src/components/Dashboard/Views/Item.vue'
+import AllItems from 'src/components/Dashboard/Views/AllItems.vue'
 
 const routes = [
   {
@@ -57,6 +58,11 @@ const routes = [
         path: 'Items',
         name: 'Items',
         component: Items
+      },
+      {
+        path: 'AllItems',
+        name: 'AllItems',
+        component: AllItems
       },
       {
         path: 'AddChild',
