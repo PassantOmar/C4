@@ -94,7 +94,9 @@ router.patch('/activity/showIntrestinAct/:actvId', isAuthenticated, asyncMiddlew
 router.post('/item/createItem', isAuthenticated, itemCtrl.createItem);
 //this is called when the user wants to add a new item
 router.get('/item/getItems', isAuthenticated, itemCtrl.getItems);
-//this is called when the user is trying to view all created items 
+//this is called when the user is trying to view all his created items 
+router.get('/item/getAllItems', isAuthenticated, itemCtrl.getAllItems);
+//this is called when the user is trying to view all users created items 
 router.delete('/item/deleteItem/:itemId', isAuthenticated, itemCtrl.deleteItem);
 //this is called when the user wants to delete one of his items
 router.patch('/item/updateItem/:itemId', isAuthenticated, itemCtrl.updateItem);

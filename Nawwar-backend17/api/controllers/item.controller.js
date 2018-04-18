@@ -2,6 +2,7 @@ var mongoose = require('mongoose'),
   moment = require('moment'),
   Validations = require('../utils/validations'),
   User = mongoose.model('User');
+  Items = mongoose.model('items');
 
  module.exports.createItem = function(req, res, next){
   const valid =
@@ -20,6 +21,7 @@ var mongoose = require('mongoose'),
   }
   delete req.body.createdAt;
   delete req.body.updatedAt;
+  
 
   User.findById(req.decodedToken.user._id).exec(function(err, user) { // checks if the user is created within the database by decoding the
     //JWT and checking the user id from the token. Then executes the rollback function
@@ -38,6 +40,11 @@ var mongoose = require('mongoose'),
         if (err) {
           return next(err);
         }
+        Items.create(req.body, function(err, newItem) {
+          if (err) {
+            return next(err);
+          }
+      });
         res.status(200).json({ //item addition was successful
           err: null,
           msg: 'Item was created successfully.',
@@ -47,7 +54,7 @@ var mongoose = require('mongoose'),
     });
   };
 
-module.exports.getItems = function(req, res, next){ //retrieves all items
+module.exports.getItems = function(req, res, next){ //retrieves items belonging to this user
   User.findById(req.decodedToken.user._id).exec(function(err, user) {
     if (err) {
       return next(err);
@@ -62,6 +69,28 @@ module.exports.getItems = function(req, res, next){ //retrieves all items
       msg: 'Items retrieved successfully.',
       data: user.item
     });
+  });
+};
+module.exports.getAllItems = function(req, res, next){ //retrieves all items
+  User.findById(req.decodedToken.user._id).exec(function(err, user) {
+    if (err) {
+      return next(err);
+    }
+    if (!user) { //user was't found in the database
+      return res
+        .status(404)
+        .json({ err: null, msg: 'User not found.', data: null });
+    }
+    Items.find(req.body,function(err,items){
+      if (err) {
+        return next(err);
+    }
+    res.status(200).json({
+      err: null,
+      msg: 'Items retrieved successfully.',
+      data: items
+    });
+  }).exec();
   });
 };
 
@@ -95,6 +124,13 @@ module.exports.deleteItem = function (req, res, next){
       if (err) {
         return next(err);
       }
+      // Items.findByIdAndRemove(req.params.itemId,function(err,newitem){
+      //   if (!newitem) {
+      //     return res
+      //       .status(404)
+      //       .json({ err: null, msg: 'Item not found.', data: null });
+      //   }
+      // });
       res.status(200).json({
         err: null,
         msg: 'Item was deleted successfully.',
@@ -155,6 +191,8 @@ module.exports.updateItem = function(req, res, next){
     if (err) {
       return next(err);
     }
+        //xxxxxx
+
     res.status(200).json({
       err: null,
       msg: 'Item was updated successfully.',

@@ -63,3 +63,4 @@ mongoose.connect(dbUrl, function(err) {
 
 require('../models/User');
 require('../models/Activity');
+require('../models/items');

@@ -155,3 +155,4 @@ const UserSchema = mongoose.Schema({
 
 
 mongoose.model('User', UserSchema);
+mongoose.model('PostItemsSchema', PostItemsSchema);
