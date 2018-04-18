@@ -34,8 +34,7 @@
               <td class="text-center">{{item.likes}}</td>
               <!-- retrieves items attributes-->
               <td class="text-center"><a class='btn btn-info btn-xs' v-on:click="editItem(item._id,item.name,item.price,item.type,item.description)"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a class="btn btn-danger btn-xs" v-on:click="deleteRow(item._id)"><span class="glyphicon glyphicon-remove"></span> Delete</a>
-              <a class='btn btn-success btn-xs' v-on:click="incrementlikes(item._id,item.likes)"><span class="glyphicon glyphicon-thumbs-up"></span> Like </a>
-              <!-- buttons for editting, deleting and liking the items -->
+              <!-- buttons for editting and deleting your items -->
               </td>
               <br></br>
           </tr>

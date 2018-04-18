@@ -56,7 +56,7 @@
       },
       methods: {
         showItem: function () {
-          // method for retrieving items which connects to getItems in the backend
+          // method for retrieving items which connects to getAllItems in the backend
           axios.get('http://localhost:3000/api/item/getAllItems', {
             headers: { authorization: sessionStorage.getItem('token') }
             //  retrieves the users token to allow the authorization
