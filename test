@@ -10,20 +10,20 @@ let should = chai.should();
 
 chai.use(chaiHttp);
 
-describe('Books', () => {
+describe('item', () => {
     beforeEach((done) => {
         Book.remove({}, (err) => { 
            done();         
         });     
     });
-  describe('/GET book', () => {
-      it('it should GET all the books', (done) => {
-            chai.request(server)
-            .get('/book')
+  describe('/GET item', () => {
+      it('it should GET all the items', (done) => {
+            chai.request('http://localhost:8080')   //this is the request of the server for every method 
+            .get('/')
             .end((err, res) => {
                 res.should.have.status(200);
-                res.body.should.be.a('array');
-                res.body.length.should.be.eql(0);
+                //res.body.should.be.a('array');
+                //res.body.length.should.be.eql(0);
               done();
             });
       });
@@ -141,6 +141,7 @@ describe('/PATCH Patch a card with a Status variable active test', () => {
     .send('1')
     .end((err, res) => {
     res.should.have.status(200);
+    //res.body.should.have.property('message').eql('Book updated!');
   done();
 });
 });
