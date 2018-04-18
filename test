@@ -128,3 +128,20 @@ describe('Books', () => {
       });
   });
 });
+
+
+
+
+----------------------------------------------post method---------------------
+describe('/PATCH Patch a card with a Status variable active test', () => {
+  it('it should GET a sample error json response ', (done) => {
+  chai.request(app)
+    .post('/loyalty/v1/cards/6064361727001553966')
+    .set('content-type', 'text/plain')
+    .send('1')
+    .end((err, res) => {
+    res.should.have.status(200);
+  done();
+});
+});
+});
